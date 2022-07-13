@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+$font-stack: Rubik, sans-serif;
+
+$dark-gray: hsl(0, 0%, 17%);
+$gray: hsl(0, 0%, 59%);
+
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+body {
+  font: 18px $font-stack;
+}

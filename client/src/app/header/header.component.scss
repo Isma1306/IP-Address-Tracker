@@ -1,0 +1,25 @@
+// %vertical {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+
+.header-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 30%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/assets/images/pattern-bg.png");
+}
+
+h1 {
+  font-weight: 400;
+  color: white;
+}
