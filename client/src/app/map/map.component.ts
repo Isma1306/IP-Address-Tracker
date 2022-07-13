@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
 @Component({
   selector: 'app-map',
@@ -6,6 +6,9 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit {
+
+  @Input() coords!: L.LatLngTuple;
+
   private map!: L.Map;
 
   private myIcon = L.icon({
@@ -14,10 +17,11 @@ export class MapComponent implements AfterViewInit {
     iconAnchor: [25, 60],
   });
 
-  private initMap(coords: L.LatLngTuple): void {
+  private initMap(): void {
     this.map = L.map('map', {
-      center: coords,
-      zoom: 15
+      center: this.coords,
+      zoom: 15,
+      zoomControl: false
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -26,19 +30,18 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-    this.addMarker([51.5, -0.09]);
+    this.addMarker(this.coords);
   }
 
   private addMarker(coords: L.LatLngTuple) {
     L.marker(coords, { icon: this.myIcon }).addTo(this.map);
     this.map.panTo(coords);
   }
-  // new L.LatLng()
 
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.initMap([51.5, -0.09]);
+    this.initMap();
   }
 
 }
