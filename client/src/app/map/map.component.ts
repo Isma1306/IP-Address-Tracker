@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 @Component({
   selector: 'app-map',
@@ -6,7 +6,7 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements AfterViewInit {
-  private map: any;
+  private map!: L.Map;
 
   private myIcon = L.icon({
     iconUrl: 'assets/images/icon-location.svg',
@@ -14,9 +14,9 @@ export class MapComponent implements AfterViewInit {
     iconAnchor: [25, 60],
   });
 
-  private initMap(): void {
+  private initMap(coords: L.LatLngTuple): void {
     this.map = L.map('map', {
-      center: [51.5, -0.09],
+      center: coords,
       zoom: 15
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -26,21 +26,19 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-    this.addMarker();
+    this.addMarker([51.5, -0.09]);
   }
 
-  private addMarker() {
-    L.marker([51.5, -0.09], { icon: this.myIcon }).addTo(this.map);
+  private addMarker(coords: L.LatLngTuple) {
+    L.marker(coords, { icon: this.myIcon }).addTo(this.map);
+    this.map.panTo(coords);
   }
-
+  // new L.LatLng()
 
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.initMap();
-
-
-
+    this.initMap([51.5, -0.09]);
   }
 
 }
