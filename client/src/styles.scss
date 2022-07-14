@@ -13,6 +13,13 @@ $gray: hsl(0, 0%, 59%);
   justify-content: center;
 }
 
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 
 body {
   font: 18px $font-stack;

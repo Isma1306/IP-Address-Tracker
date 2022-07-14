@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
+  search = new FormControl('', Validators.required);
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  submitHandler($event: SubmitEvent) {
+    $event.preventDefault();
+    console.log(this.search.value);
+
+  }
 }
