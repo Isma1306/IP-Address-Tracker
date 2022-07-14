@@ -1,4 +1,7 @@
+import { IpifyResponse } from './../../shared/interfaces/ipify-response';
 import { Component, OnInit } from '@angular/core';
+import { APIGeoIpifyService } from 'src/app/shared/services/api-geo-ipify.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-info-card',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoCardComponent implements OnInit {
 
-  constructor() { }
+  public data$!: BehaviorSubject<IpifyResponse>;
+  public ip$!: any;
+  constructor(private api: APIGeoIpifyService) { }
 
   ngOnInit(): void {
+    this.data$ = this.api.ResponseData$;
+
   }
 
 }
