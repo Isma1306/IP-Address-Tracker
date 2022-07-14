@@ -1,0 +1,40 @@
+$gray: hsl(0, 0%, 59%);
+$dark-gray: hsl(0, 0%, 17%);
+
+h4 {
+  margin-bottom: 5px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: $gray;
+
+}
+
+h2 {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  color: $dark-gray;
+}
+
+.info-container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-wrap: wrap;
+  z-index: 1;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: -50%;
+  margin-top: 50px;
+  background-color: white;
+
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 280px;
+  padding-left: 20px;
+  align-items: flex-start;
+}
