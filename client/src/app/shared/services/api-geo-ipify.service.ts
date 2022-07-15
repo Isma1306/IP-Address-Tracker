@@ -1,6 +1,6 @@
 import { IpifyResponse } from './../interfaces/ipify-response';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class APIGeoIpifyService {
       "isp": "Google LLC"
     };
     const res = of(response);
-    this.ResponseData$.next(response);
+    res.subscribe(resp => this.ResponseData$.next(resp));
     return res;
 
   }
