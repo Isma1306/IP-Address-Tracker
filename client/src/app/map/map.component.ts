@@ -1,5 +1,8 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
+import { BehaviorSubject } from 'rxjs';
+import { IpifyResponse } from '../shared/interfaces/ipify-response';
+import { APIGeoIpifyService } from '../shared/services/api-geo-ipify.service';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -7,7 +10,8 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements AfterViewInit {
 
-  @Input() coords!: L.LatLngTuple;
+
+  public data$!: BehaviorSubject<IpifyResponse>;
 
   private map!: L.Map;
 
@@ -17,9 +21,9 @@ export class MapComponent implements AfterViewInit {
     iconAnchor: [25, 60],
   });
 
-  private initMap(): void {
+  private initMap(coords: L.LatLngTuple): void {
     this.map = L.map('map', {
-      center: this.coords,
+      center: coords,
       zoom: 15,
       zoomControl: false
     });
@@ -30,7 +34,7 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-    this.addMarker(this.coords);
+    this.addMarker(coords);
   }
 
   private addMarker(coords: L.LatLngTuple) {
@@ -38,10 +42,10 @@ export class MapComponent implements AfterViewInit {
     this.map.panTo(coords);
   }
 
-  constructor() { }
+  constructor(private api: APIGeoIpifyService) { }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    this.api.ResponseData$.subscribe((response) => this.initMap([response.location.lat, response.location.lng]));
   }
 
 }

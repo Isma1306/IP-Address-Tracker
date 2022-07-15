@@ -10,16 +10,16 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class APIGeoIpifyService {
 
   ResponseData$: BehaviorSubject<IpifyResponse> = new BehaviorSubject({
-    "ip": "8.8.8.8",
+    "ip": "1.1.1.1",
     "location": {
       "country": "US",
       "region": "California",
       "city": "Mountain View",
       "lat": 37.40599,
-      "lng": -122.078514,
-      "timezone": "-07:00",
+      "lng": -102.078514,
+      "timezone": "-03:00",
     },
-    "isp": "Google LLC"
+    "isp": "CloudFlare"
   });
   constructor() { }
 
