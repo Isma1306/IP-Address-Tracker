@@ -5,14 +5,17 @@
       {{(data$ | async)?.ip}}
     </h2>
   </div>
+  <div class="separator"></div>
   <div class="card vertical">
     <h4>LOCATION</h4>
     <h2>{{(data$ | async)?.location?.city}}</h2>
   </div>
+  <div class="separator"></div>
   <div class="card vertical">
     <h4>TIMEZONE</h4>
     <h2>UTC: {{(data$ | async)?.location?.timezone }}</h2>
   </div>
+  <div class="separator"></div>
   <div class="card vertical">
     <h4>ISP</h4>
     <h2>{{(data$ | async)?.isp}}</h2>

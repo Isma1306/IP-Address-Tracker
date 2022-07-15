@@ -1,7 +1,10 @@
 $gray: hsl(0, 0%, 59%);
 $dark-gray: hsl(0, 0%, 17%);
 
+
+
 h4 {
+  margin-top: -10px;
   margin-bottom: 5px;
   font-size: 12px;
   letter-spacing: 2px;
@@ -24,17 +27,65 @@ h2 {
   z-index: 1;
   padding: 15px;
   border-radius: 15px;
-  margin-bottom: -50%;
-  margin-top: 50px;
+  margin-top: 30px;
   background-color: white;
+  height: 130px;
 
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  height: 100px;
-  max-width: 280px;
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 280px;
   align-items: flex-start;
+  justify-items: flex-start;
+}
+
+.separator {
+  background-color: $gray;
+  height: 75px;
+  width: 1px;
+  margin-right: 25px;
+}
+
+@media (max-width: 1000px) {
+  .info-container {
+    height: fit-content;
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: 10px;
+  }
+
+  h2 {
+
+    font-size: 20px;
+
+  }
+
+  .info-container {
+    margin-top: 20px
+  }
+
+  .card {
+
+    align-items: center;
+
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .info-container {
+    height: fit-content;
+  }
 }

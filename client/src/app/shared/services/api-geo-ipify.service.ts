@@ -10,7 +10,7 @@ import { of, ReplaySubject } from 'rxjs';
 
 export class APIGeoIpifyService {
 
-  private baseURL = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_CDanmaNxlV2sJ6Aw336JxqK2890p2&ipAddress=';
+  private baseURL = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_CDanmaNxlV2sJ6Aw336JxqK2890p2&';
   ResponseData$: ReplaySubject<IpifyResponse> = new ReplaySubject(1);
   constructor(private http: HttpClient) { }
 
@@ -35,6 +35,12 @@ export class APIGeoIpifyService {
   }
 
   getLocation(address: string) {
+    // let fullURL = `${this.baseURL}ipAddress=${address}`;
+    // if (!address.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/)) {
+    //   fullURL = `${this.baseURL}domain=${address}`;
+    // }
+    // this.http.get(fullURL)
+    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
     const response = {
       "ip": "1.1.1.1",
       "location": {
@@ -50,8 +56,7 @@ export class APIGeoIpifyService {
 
 
     this.ResponseData$.next(response);
-    // this.http.get(`${this.baseURL}${address}`)
-    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+
 
 
   }
