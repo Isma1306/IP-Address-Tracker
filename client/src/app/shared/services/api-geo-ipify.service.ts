@@ -1,7 +1,7 @@
 import { IpifyResponse } from './../interfaces/ipify-response';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ReplaySubject } from 'rxjs';
+import { of, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,6 @@ export class APIGeoIpifyService {
   constructor(private http: HttpClient) { }
 
   getClient() {
-    this.http.get(this.baseURL)
-      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
-  }
-
-  getLocation(address: string) {
     const response = {
       "ip": "8.8.8.8",
       "location": {
@@ -32,8 +27,31 @@ export class APIGeoIpifyService {
       },
       "isp": "Google LLC"
     };
-    this.http.get(`${this.baseURL}${address}`)
-      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+
+
+    this.ResponseData$.next(response);
+    // this.http.get(this.baseURL)
+    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+  }
+
+  getLocation(address: string) {
+    const response = {
+      "ip": "1.1.1.1",
+      "location": {
+        "country": "US",
+        "region": "California",
+        "city": "Mountain View",
+        "lat": 37.40599,
+        "lng": -122.078514,
+        "timezone": "-07:00",
+      },
+      "isp": "Google LLC"
+    };
+
+
+    this.ResponseData$.next(response);
+    // this.http.get(`${this.baseURL}${address}`)
+    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
 
 
   }

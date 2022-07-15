@@ -5,16 +5,20 @@
   right: 0;
   top: 0;
   height: 30%;
-  width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("/assets/images/pattern-bg.png");
 }
 
-
+.search-bar {
+  width: 100%;
+}
 
 h1 {
-  font-weight: 400;
+  font-size: 32px;
+  font-weight: 500;
   color: white;
 }

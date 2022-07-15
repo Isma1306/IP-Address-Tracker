@@ -5,12 +5,11 @@
 
 
 form {
-  width: 560px;
-  min-width: 350px;
   height: 60px;
 }
 
 input {
+  max-width: 560px;
   @extend .font;
   flex: 1;
   height: 60px;
