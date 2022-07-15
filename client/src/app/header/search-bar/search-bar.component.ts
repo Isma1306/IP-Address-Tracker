@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { APIGeoIpifyService } from 'src/app/shared/services/api-geo-ipify.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,14 +11,15 @@ export class SearchBarComponent implements OnInit {
 
   search = new FormControl('', Validators.required);
 
-  constructor() { }
+  constructor(private api: APIGeoIpifyService) { }
 
   ngOnInit(): void {
   }
 
   submitHandler($event: SubmitEvent) {
     $event.preventDefault();
-    console.log(this.search.value);
-
+    if (!this.search.errors?.['required']) {
+      this.api.getLocation(this.search.value);
+    }
   }
 }

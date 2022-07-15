@@ -1,6 +1,6 @@
 import { IpifyResponse } from './../interfaces/ipify-response';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,18 +9,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 export class APIGeoIpifyService {
 
-  ResponseData$: BehaviorSubject<IpifyResponse> = new BehaviorSubject({
-    "ip": "1.1.1.1",
-    "location": {
-      "country": "US",
-      "region": "California",
-      "city": "Mountain View",
-      "lat": 37.40599,
-      "lng": -102.078514,
-      "timezone": "-03:00",
-    },
-    "isp": "CloudFlare"
-  });
+  ResponseData$: ReplaySubject<IpifyResponse> = new ReplaySubject(1);
   constructor() { }
 
 
@@ -37,8 +26,8 @@ export class APIGeoIpifyService {
       },
       "isp": "Google LLC"
     };
-
     const res = of(response);
+    this.ResponseData$.next(response);
     return res;
 
   }

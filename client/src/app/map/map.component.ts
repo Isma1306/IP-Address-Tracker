@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { IpifyResponse } from '../shared/interfaces/ipify-response';
 import { APIGeoIpifyService } from '../shared/services/api-geo-ipify.service';
 @Component({
@@ -11,7 +11,7 @@ import { APIGeoIpifyService } from '../shared/services/api-geo-ipify.service';
 export class MapComponent implements AfterViewInit {
 
 
-  public data$!: BehaviorSubject<IpifyResponse>;
+  public data$!: ReplaySubject<IpifyResponse>;
 
   private map!: L.Map;
 
@@ -24,7 +24,7 @@ export class MapComponent implements AfterViewInit {
   private initMap(coords: L.LatLngTuple): void {
     this.map = L.map('map', {
       center: coords,
-      zoom: 15,
+      zoom: 0,
       zoomControl: false
     });
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -34,18 +34,19 @@ export class MapComponent implements AfterViewInit {
     });
 
     tiles.addTo(this.map);
-    this.addMarker(coords);
   }
 
   private addMarker(coords: L.LatLngTuple) {
     L.marker(coords, { icon: this.myIcon }).addTo(this.map);
-    this.map.panTo(coords);
+    this.map.setView(coords, 10);
+
   }
 
   constructor(private api: APIGeoIpifyService) { }
 
   ngAfterViewInit(): void {
-    this.api.ResponseData$.subscribe((response) => this.initMap([response.location.lat, response.location.lng]));
+    this.initMap([0, 0]);
+    this.api.ResponseData$.subscribe((response) => this.addMarker([response.location.lat, response.location.lng]));
   }
 
 }
