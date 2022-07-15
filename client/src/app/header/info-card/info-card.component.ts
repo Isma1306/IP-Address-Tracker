@@ -11,12 +11,11 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class InfoCardComponent implements OnInit {
 
   public data$!: BehaviorSubject<IpifyResponse>;
-  public ip$!: any;
+
   constructor(private api: APIGeoIpifyService) { }
 
   ngOnInit(): void {
     this.data$ = this.api.ResponseData$;
-
   }
 
 }
