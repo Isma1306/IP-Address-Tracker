@@ -1,4 +1,6 @@
+
 import { Component } from '@angular/core';
+import { APIGeoIpifyService } from './shared/services/api-geo-ipify.service';
 
 
 @Component({
@@ -8,5 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client';
+
+  constructor(private api: APIGeoIpifyService) { }
+
+  ngOnInit(): void {
+    this.api.getClient();
+  }
 
 }

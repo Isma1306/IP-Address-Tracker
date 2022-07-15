@@ -1,6 +1,7 @@
 import { IpifyResponse } from './../interfaces/ipify-response';
 import { Injectable } from '@angular/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,16 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 
 export class APIGeoIpifyService {
 
+  private baseURL = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_CDanmaNxlV2sJ6Aw336JxqK2890p2&ipAddress=';
   ResponseData$: ReplaySubject<IpifyResponse> = new ReplaySubject(1);
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  getClient() {
+    this.http.get(this.baseURL)
+      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+  }
 
-  getLocation(address: string): Observable<IpifyResponse> {
+  getLocation(address: string) {
     const response = {
       "ip": "8.8.8.8",
       "location": {
@@ -26,9 +32,10 @@ export class APIGeoIpifyService {
       },
       "isp": "Google LLC"
     };
-    const res = of(response);
-    res.subscribe(resp => this.ResponseData$.next(resp));
-    return res;
+    this.http.get(`${this.baseURL}${address}`)
+      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+
 
   }
+
 }

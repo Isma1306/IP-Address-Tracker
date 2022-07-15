@@ -1,7 +1,7 @@
 import { IpifyResponse } from './../../shared/interfaces/ipify-response';
 import { Component, OnInit } from '@angular/core';
 import { APIGeoIpifyService } from 'src/app/shared/services/api-geo-ipify.service';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { of, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-info-card',
