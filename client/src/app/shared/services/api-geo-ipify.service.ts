@@ -15,50 +15,49 @@ export class APIGeoIpifyService {
   constructor(private http: HttpClient) { }
 
   getClient() {
-    const response = {
-      "ip": "8.8.8.8",
-      "location": {
-        "country": "US",
-        "region": "California",
-        "city": "Mountain View",
-        "lat": 37.40599,
-        "lng": -122.078514,
-        "timezone": "-07:00",
-      },
-      "isp": "Google LLC"
-    };
+    this.http.get(this.baseURL)
+      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
+    // if you want to try the app without doing real queries you can uncomment the text below
+
+    // const response = {
+    //   "ip": "8.8.8.8",
+    //   "location": {
+    //     "country": "US",
+    //     "region": "California",
+    //     "city": "Mountain View",
+    //     "lat": 37.40599,
+    //     "lng": -122.078514,
+    //     "timezone": "-07:00",
+    //   },
+    //   "isp": "Google LLC"
+    // };
+    // this.ResponseData$.next(response);
 
 
-    this.ResponseData$.next(response);
-    // this.http.get(this.baseURL)
-    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
   }
 
   getLocation(address: string) {
-    // let fullURL = `${this.baseURL}ipAddress=${address}`;
-    // if (!address.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/)) {
-    //   fullURL = `${this.baseURL}domain=${address}`;
-    // }
-    // this.http.get(fullURL)
-    //   .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
-    const response = {
-      "ip": "1.1.1.1",
-      "location": {
-        "country": "US",
-        "region": "California",
-        "city": "Mountain View",
-        "lat": 37.40599,
-        "lng": -122.078514,
-        "timezone": "-07:00",
-      },
-      "isp": "Google LLC"
-    };
+    let fullURL = `${this.baseURL}ipAddress=${address}`;
+    if (!address.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/)) {
+      fullURL = `${this.baseURL}domain=${address}`;
+    }
+    this.http.get(fullURL)
+      .subscribe((res) => this.ResponseData$.next(res as IpifyResponse));
 
-
-    this.ResponseData$.next(response);
-
-
-
+    // if you want to try the app without doing real queries you can uncomment the text below
+    // const response = {
+    //   "ip": "1.1.1.1",
+    //   "location": {
+    //     "country": "US",
+    //     "region": "California",
+    //     "city": "Mountain View",
+    //     "lat": 37.40599,
+    //     "lng": -122.078514,
+    //     "timezone": "-07:00",
+    //   },
+    //   "isp": "Google LLC"
+    // };
+    // this.ResponseData$.next(response);
   }
 
 }
