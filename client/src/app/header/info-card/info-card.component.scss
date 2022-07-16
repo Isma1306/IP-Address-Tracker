@@ -50,9 +50,13 @@ h2 {
   margin-right: 25px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .info-container {
     height: fit-content;
+  }
+
+  .separator {
+    display: none;
   }
 }
 
@@ -81,11 +85,4 @@ h2 {
 
   }
 
-  .separator {
-    display: none;
-  }
-
-  .info-container {
-    height: fit-content;
-  }
 }
